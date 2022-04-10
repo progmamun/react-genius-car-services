@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer>
       <p>
-        <small>Copywrite © {this.getYear()} Al Mamun Khan</small>
+        <small>Copywrite © {new Date().getFullYear()} Al Mamun Khan</small>
       </p>
     </footer>
   );
