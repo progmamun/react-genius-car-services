@@ -9,7 +9,6 @@ import Expert from '../Expert/Expert';
 
 const experts = [
   { id: 1, name: 'Will smith', img: expert1 },
-  { id: 1, name: 'Will smith', img: expert1 },
   { id: 2, name: 'Chris Rock', img: expert2 },
   { id: 3, name: 'Dwayne Rock', img: expert3 },
   { id: 4, name: 'Naymer jr', img: expert4 },
