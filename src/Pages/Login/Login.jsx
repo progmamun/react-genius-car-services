@@ -12,6 +12,15 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || '/';
 
+  let errorElement;
+  if (error) {
+    errorElement = (
+      <div>
+        <p className="text-danger">Error: {error?.message}</p>
+      </div>
+    );
+  }
+
   if (user) {
     navigate(from, { replace: true });
   }
@@ -58,6 +67,7 @@ const Login = () => {
           Submit
         </Button>
       </Form>
+      {errorElement}
       <p>
         New to Genius Car?{' '}
         <Link
