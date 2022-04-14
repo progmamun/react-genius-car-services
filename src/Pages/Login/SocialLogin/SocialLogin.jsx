@@ -18,11 +18,9 @@ const SocialLogin = () => {
 
   if (error || error1) {
     errorElement = (
-      <div>
-        <p className="text-danger">
-          Error: {error?.message} {error1?.message}
-        </p>
-      </div>
+      <p className="text-danger">
+        Error: {error?.message} {error1?.message}
+      </p>
     );
   }
   if (user || user1) {
@@ -39,7 +37,7 @@ const SocialLogin = () => {
         <p className="mt-3 px-2">or</p>
         <div style={{ height: '1px' }} className="w-50 bg-warning"></div>
       </div>
-
+      {errorElement}
       <div>
         <button
           onClick={() => signInWithGoogle()}
