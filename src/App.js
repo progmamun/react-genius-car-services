@@ -46,7 +46,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/order"
+          path="/orders"
           element={
             <RequireAuth>
               <Order></Order>
@@ -64,7 +64,7 @@ function App() {
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
-      <ToastContainer></ToastContainer>
+      <ToastContainer />
     </div>
   );
 }
