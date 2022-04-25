@@ -1,30 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useServiceDetail from '../../../hooks/useServiceDetail';
-import useState from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import { toast } from 'react-toastify';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Checkout = () => {
   const { serviceId } = useParams();
   const [service] = useServiceDetail(serviceId);
   const [user] = useAuthState(auth);
 
-  /* const [user, setUser] = useState({
-    name: 'Al Mamun Khan',
-    email: 'mamun@gmail.com',
-    address: 'Pabna',
-    phone: '0174447444',
-  });
+  // const [user, setUser] = useState({
+  //     name: 'Akbar The Great',
+  //     email: 'akbar@momo.taj',
+  //     address: 'Tajmohol Road Md.pur',
+  //     phone: '01711111111'
+  // });
 
-  const handleAddressChange = event => {
-    const { address, ...rest } = user;
-    const newAddress = event.target.value;
-    const newUser = { address: newAddress, ...rest };
-    setUser(newUser);
-  }; */
+  // const handleAddressChange = event =>{
+  //     console.log(event.target.value);
+  //     const {address, ...rest} = user;
+  //     const newAddress = event.target.value;
+  //     const newUser = {address: newAddress, ...rest};
+  //     console.log(newUser);
+  //     setUser(newUser);
+  // }
 
   const handlePlaceOrder = event => {
     event.preventDefault();
@@ -35,39 +36,41 @@ const Checkout = () => {
       address: event.target.address.value,
       phone: event.target.phone.value,
     };
-    axios.post('http://localhost:5000/order', order).then(response => {
-      const { data } = response;
-      if (data.insertedId) {
-        toast('Your order is booked!!!');
-        event.target.reset();
-      }
-    });
+    axios
+      .post('https://blooming-river-36741.herokuapp.com/order', order)
+      .then(response => {
+        const { data } = response;
+        if (data.insertedId) {
+          toast('Your order is booked!!!');
+          event.target.reset();
+        }
+      });
   };
+
   return (
     <div className="w-50 mx-auto">
-      <h2>Please Order:{service.name}</h2>
+      <h2>Please Order: {service.name}</h2>
       <form onSubmit={handlePlaceOrder}>
         <input
-          value={user?.displayName}
-          readOnly
           className="w-100 mb-2"
           type="text"
+          value={user?.displayName}
           name="name"
           placeholder="name"
           required
-          id=""
+          readOnly
+          disabled
         />
         <br />
         <input
-          value={user?.email}
-          readOnly
-          disabled
           className="w-100 mb-2"
           type="email"
-          name="Email"
-          placeholder="Enter Your Email"
+          value={user?.email}
+          name="email"
+          placeholder="email"
           required
-          id=""
+          readOnly
+          disabled
         />
         <br />
         <input
@@ -77,30 +80,27 @@ const Checkout = () => {
           name="service"
           placeholder="service"
           required
-          id=""
+          readOnly
         />
         <br />
         <input
           className="w-100 mb-2"
-          // onChange={handleAddressChange}
           type="text"
           name="address"
-          placeholder="Address"
+          placeholder="address"
           autoComplete="off"
           required
-          id=""
         />
         <br />
         <input
           className="w-100 mb-2"
           type="text"
-          name="number"
-          placeholder="phone number"
+          name="phone"
+          placeholder="phone"
           required
-          id=""
         />
         <br />
-        <input className="btn btn-info" type="submit" value="Place Order" />
+        <input className="btn btn-primary" type="submit" value="Place Order" />
       </form>
     </div>
   );
