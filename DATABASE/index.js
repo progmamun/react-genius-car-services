@@ -25,6 +25,7 @@ async function run() {
     const serviceCollection = client
       .db('geniusServices')
       .collection('services');
+    const orderCollection = client.db('geniusServices').collection('order');
 
     app.get('/service', async (req, res) => {
       const query = {};
@@ -52,6 +53,13 @@ async function run() {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await serviceCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // Order collection API
+    app.post('/order', async (req, res) => {
+      const order = req.body;
+      const result = await orderCollection.insertOne(order);
       res.send(result);
     });
   } finally {
