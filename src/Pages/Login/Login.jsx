@@ -33,18 +33,21 @@ const Login = () => {
   }
 
   if (user) {
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
 
   const emailRef = useRef('');
   const passwordRef = useRef('');
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    signInWithEmailAndPassword(email, password);
+    await signInWithEmailAndPassword(email, password);
+    const { data } = await axios.post('http://localhost:5000/login', { email });
+    localStorage.setItem('accessToken', data.accessToken);
     // console.log(email, password);
+    navigate(from, { replace: true });
   };
 
   const navigateRegister = event => {
