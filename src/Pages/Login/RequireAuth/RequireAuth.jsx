@@ -1,5 +1,4 @@
 import React from 'react';
-import { ToastContainer } from 'react-bootstrap';
 import {
   useAuthState,
   useSendEmailVerification,
@@ -36,7 +35,6 @@ const RequireAuth = ({ children }) => {
         >
           send email verification again
         </button>
-        <ToastContainer></ToastContainer>
       </div>
     );
   }
