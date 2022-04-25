@@ -9,7 +9,11 @@ const Order = () => {
   useEffect(() => {
     const getOrders = async () => {
       const url = `http://localhost:5000/order`;
-      const { data } = await axios.get(url);
+      const { data } = await axios.get(url, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
       setOrders(data);
     };
     getOrders();

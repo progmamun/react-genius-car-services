@@ -11,6 +11,7 @@ import SocialLogin from './SocialLogin/SocialLogin';
 import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
